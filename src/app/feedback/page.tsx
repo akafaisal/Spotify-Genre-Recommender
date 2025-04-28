@@ -2,13 +2,14 @@
 import { Googly } from "@/components/googlead";
 import { Bell, User, Mail } from "lucide-react"; // Importing User and Mail icons
 import { useState } from "react";
+import { MouseEvent } from "react";
 
 const Page = () => {
   const [namey, setNamey] = useState("");
   const [emaily, setEmaily] = useState("");
   const [messagey, setMessagey] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const payload = { namey, emaily, messagey };
     const res = await fetch("/api/feedback", {
