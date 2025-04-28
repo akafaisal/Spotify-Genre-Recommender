@@ -13,7 +13,7 @@ export const Googly = () => {
 
       {/* Ad Slot */}
       <ins
-        className="adsbygoogle"
+        className="adsbygoogle w-251"
         style={{ display: "block" }}
         data-ad-format="fluid"
         data-ad-layout-key="-fb+5w+4e-db+86"
