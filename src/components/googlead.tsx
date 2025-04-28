@@ -3,6 +3,7 @@ import Script from "next/script";
 export const Googly = () => {
   return (
     <>
+      {/* Load Google AdScript asynchronously */}
       <Script
         async
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5787069373355659"
@@ -10,6 +11,7 @@ export const Googly = () => {
         strategy="afterInteractive"
       />
 
+      {/* Ad Slot */}
       <ins
         className="adsbygoogle"
         style={{ display: "block" }}
@@ -19,9 +21,14 @@ export const Googly = () => {
         data-ad-slot="3338462826"
       ></ins>
 
-      <Script id="googly" strategy="afterInteractive">
-        {`(adsbygoogle = window.adsbygoogle || []).push({});`}
-      </Script>
+      {/* Push the ad script to load after interactive */}
+      <Script
+        id="googly-push"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `(adsbygoogle = window.adsbygoogle || []).push({});`,
+        }}
+      />
     </>
   );
 };
