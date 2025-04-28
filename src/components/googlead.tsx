@@ -12,8 +12,8 @@ export const Googly = () => {
 
       {/* Ad Slot */}
       <ins
-        className="adsbygoogle w-3xl"
-        style={{ display: "block" }}
+        className="adsbygoogle"
+        style={{ display: "block", minWidth: "250px" }}
         data-ad-format="fluid"
         data-ad-layout-key="-fb+5w+4e-db+86"
         data-ad-client="ca-pub-5787069373355659"
