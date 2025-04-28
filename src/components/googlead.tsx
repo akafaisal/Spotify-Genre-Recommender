@@ -8,12 +8,11 @@ export const Googly = () => {
         async
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5787069373355659"
         crossOrigin="anonymous"
-        strategy="afterInteractive"
       />
 
       {/* Ad Slot */}
       <ins
-        className="adsbygoogle w-251"
+        className="adsbygoogle w-3xl"
         style={{ display: "block" }}
         data-ad-format="fluid"
         data-ad-layout-key="-fb+5w+4e-db+86"
