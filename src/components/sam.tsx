@@ -23,7 +23,7 @@ export function Sam() {
             onClick={getFortune}
             className="bg-indigo-600 text-white px-4 py-2 rounded-lg  hover:bg-indigo-700 transition "
           >
-            Reveal Sam's Fortune
+            Reveal Sam&apos;s Fortune
           </button>
           <p className="mt-6 text-xl text-center max-w-md outline rounded p-5 bg-teal-300">
             {fortune}

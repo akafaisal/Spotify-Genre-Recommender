@@ -6,8 +6,6 @@ import {
   NavigationMenuTrigger,
   NavigationMenuContent,
   NavigationMenuLink,
-  NavigationMenuTriggerStyle,
-  NavigationMenuViewport,
 } from "./ui/navigation-menu"; // or "@/components/ui/navigation-menu" if alias is set
 
 export const NavigationBar = () => {

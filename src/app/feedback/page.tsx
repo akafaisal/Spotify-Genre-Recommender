@@ -3,7 +3,7 @@ import { Googly } from "@/components/googlead";
 import { Bell, User, Mail } from "lucide-react"; // Importing User and Mail icons
 import { useState } from "react";
 
-const page = () => {
+const Page = () => {
   const [namey, setNamey] = useState("");
   const [emaily, setEmaily] = useState("");
   const [messagey, setMessagey] = useState("");
@@ -127,4 +127,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
