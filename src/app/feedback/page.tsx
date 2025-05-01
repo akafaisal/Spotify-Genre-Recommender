@@ -1,13 +1,18 @@
 "use client";
 import { Googly } from "@/components/googlead";
-import { Bell, User, Mail } from "lucide-react"; // Importing User and Mail icons
-import { useState } from "react";
+import { Bell, User, Mail, XCircle } from "lucide-react"; // Importing User and Mail icons
+import { useState, useEffect } from "react";
 import { MouseEvent } from "react";
 
 const Page = () => {
   const [namey, setNamey] = useState("");
   const [emaily, setEmaily] = useState("");
   const [messagey, setMessagey] = useState("");
+
+  //state
+  const [localDataList, setLocalDataList] = useState([
+    { id: 0, name: "", email: "", message: "" },
+  ]);
 
   const handleSubmit = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -22,11 +27,36 @@ const Page = () => {
 
     const data = await res.json();
     console.log("Server replied:", data);
+
+    //local storrage below
+    const newEntry = {
+      id: Date.now(),
+      name: namey,
+      email: emaily,
+      message: messagey,
+    };
+
+    setLocalDataList((prevData) => {
+      const updatedData = [...prevData, newEntry];
+      localStorage.setItem("userFeedback", JSON.stringify(updatedData));
+      return updatedData;
+    });
+
+    setNamey("");
+    setEmaily("");
+    setMessagey("");
   };
+
+  useEffect(() => {
+    const savedData = localStorage.getItem("userFeedback");
+    if (savedData) {
+      setLocalDataList(JSON.parse(savedData));
+    }
+  }, []);
 
   return (
     <>
-      <div className="flex justify-center">
+      <div className="flex justify-center translate-x-30">
         <div className="flex flex-col mt-5 border-2 border-black w-100 p-5 rounded-3xl">
           {/* Name Section with User Icon */}
           <div className="flex mb-4 items-center group">
@@ -105,9 +135,14 @@ const Page = () => {
                 outline-3 pl-4 w-70 text-xl
               "
               id="Message"
-              placeholder="Write Message..."
+              placeholder="Ctrl+Enter to Sumbit"
               onChange={(e) => {
                 setMessagey(e.target.value);
+              }}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" && event.ctrlKey) {
+                  handleSubmit(event);
+                }
               }}
             />
           </div>
@@ -123,6 +158,30 @@ const Page = () => {
           </div>
         </div>
         <Googly />
+      </div>
+
+      <div className="flex mt-10 justify-start flex-wrap ml-40  w-300  h-100">
+        {localDataList.map((entry) => (
+          <div
+            key={entry.id}
+            className="relative flex flex-col mt-5 mr-3 border-2 border-black w-90    h-1/2 p-5 rounded-3xl"
+          >
+            {/* deleting icon */}
+            <XCircle
+              className="  cursor-pointer absolute top-2 right-2 text-red-500 hover:scale-110 transition-transform"
+              onClick={() => {
+                setLocalDataList((prev) => {
+                  const updated = prev.filter((item) => item.id !== entry.id);
+                  localStorage.setItem("userFeedback", JSON.stringify(updated));
+                  return updated;
+                });
+              }}
+            />
+            <h3>{entry.name}</h3>
+            <h3>{entry.email}</h3>
+            <h3>{entry.message}</h3>
+          </div>
+        ))}
       </div>
     </>
   );
