@@ -1,0 +1,25 @@
+{
+  "sad": [
+    "Adele",
+    "Billie Eilish",
+    "Lana Del Rey",
+    "sad piano",
+    "melancholy acoustic"
+  ],
+  "happy": [
+    "Pharrell Williams",
+    "Katy Perry",
+    "Shawn Mendes",
+    "feel good pop",
+    "sunshine indie"
+  ],
+  "workout": ["Eminem", "Drake", "Trap Nation", "beast mode", "cardio edm"],
+  "chill": [
+    "lofi beats",
+    "Chillhop Music",
+    "study vibes",
+    "ambient electronic",
+    "slow jazz"
+  ],
+  "new": ["fresh finds", "rising artists", "fresh pop", "indian hits"]
+}

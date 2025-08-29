@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Honk&display=swap");
+
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -118,5 +120,54 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  @keyframes gradient-x {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  .animate-gradient-x {
+    background-size: 200% 200%;
+    animation: gradient-x 6s ease infinite;
+  }
+
+  @keyframes gradient-xy {
+    0%,
+    100% {
+      background-position: 0% 0%;
+    }
+    50% {
+      background-position: 100% 100%;
+    }
+  }
+
+  .animate-gradient-xy {
+    background-size: 300% 300%;
+    animation: gradient-xy 10s ease infinite;
+  }
+}
+
+.font-honk {
+  font-family: "Honk", system-ui;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "MORF" 15, "SHLN" 50;
+}
+@keyframes bassPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
   }
 }
