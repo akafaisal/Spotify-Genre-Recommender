@@ -25,10 +25,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-       {/* Preconnect for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-        {/* Load Honk font */}
         <link
           href="https://fonts.googleapis.com/css2?family=Honk&display=swap"
           rel="stylesheet"
