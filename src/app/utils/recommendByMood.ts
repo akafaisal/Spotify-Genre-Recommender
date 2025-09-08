@@ -50,7 +50,20 @@ export const recommendByMood = async (mood: string) => {
   genresToSearch = [...new Set(genresToSearch)];
 
   // Search Spotify for each unique genre
-  const results: any[] = [];
+
+  interface Track {
+    id: string;
+    name: string;
+    artist: string;
+    artists: string[];
+    albumName: string;
+    albumImageUrl: string;
+    uri: string;
+    previewUrl: string | null;
+    durationMs: number;
+  }
+  
+  const results: Track[] = [];
   for (const keyword of genresToSearch) {
     const tracks = await searchSpotify(keyword, token);
     results.push(...tracks);
