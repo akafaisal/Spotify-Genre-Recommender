@@ -4,8 +4,7 @@ import Image from "next/image";
 import { LucideHeart } from "lucide-react";
 import { SpinnerCircular } from "spinners-react";
 import Link from "next/link";
-import { useRef } from "react";
-import { motion } from "framer-motion";
+
 
 // Define types
 type Track = {
