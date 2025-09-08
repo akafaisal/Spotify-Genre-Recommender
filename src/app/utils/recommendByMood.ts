@@ -1,5 +1,4 @@
 import { getSpotifyToken } from "./getSpotifyToken";
-import mongoose from "mongoose";
 import Moody from "../../models/Spotify";
 import connectMongo from "@/lib/mongodb_spotify";
 
