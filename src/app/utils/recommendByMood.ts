@@ -42,7 +42,7 @@ export const recommendByMood = async (mood: string) => {
     likedDoc = await Moody.findOne({ name: "liked" });
     genresToSearch = likedDoc?.genres || [];
   } else {
-    let moodDoc = await Moody.findOne({ name: mood });
+    const moodDoc = await Moody.findOne({ name: mood });
     genresToSearch = moodDoc?.genres?.length ? moodDoc.genres : [mood];
   }
 
