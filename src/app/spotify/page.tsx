@@ -79,14 +79,7 @@ export default function Page() {
     }
   };
 
-  const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: (i: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: { delay: i * 0.15, duration: 0.5, ease: "easeOut" },
-    }),
-  };
+
 
   return (
     <>
@@ -152,7 +145,7 @@ export default function Page() {
             {tracks.map((t) => (
               <div
                 key={t.id}
-                onClick={(e) => {
+                onClick={() => {
                   handleLike(t.id, t.artists[0].id);
                 }}
                 onDoubleClick={() => {
