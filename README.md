@@ -24,20 +24,4 @@ A **Next.js + TypeScript** app that recommends **Spotify tracks** based on user-
 
 
 
-📂 Project Structure
-📁 src/
- ├── app/
- │   ├── page.tsx           # Main UI (mood selection, track display, like system)
- │   └── api/mood/route.ts  # API route handling mood & liked genres
- │
- ├── models/
- │   └── Spotify.ts         # Mongoose schema for storing moods/genres
- │
- ├── utils/
- │   ├── getSpotifyToken.ts # Auth helper (Client Credentials flow)
- │   ├── recommendByMood.ts # Logic for fetching mood/genre recommendations
- │   └── saveGenre.ts       # Saves liked artist's genres to DB
- │
- └── lib/
-     └── mongodb_spotify.ts # MongoDB connection utility
 
