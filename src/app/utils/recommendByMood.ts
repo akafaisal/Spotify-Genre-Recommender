@@ -1,6 +1,6 @@
 import { getSpotifyToken } from "./getSpotifyToken";
 import Moody from "../../models/Spotify";
-import connectMongo from "@/lib/mongodb_spotify";
+import connectMongo from "@/lib/connect_mongodb";
 
 const searchSpotify = async (keyword: string, token: string) => {
   const res = await fetch(
