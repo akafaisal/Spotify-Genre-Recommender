@@ -20,7 +20,9 @@ A **Next.js + TypeScript** app that recommends **Spotify tracks** based on user-
 - **Styling:** TailwindCSS  
 - **Database:** MongoDB (Mongoose)  
 - **API:** Spotify Web API (Client Credentials flow)  
-- **Icons/Components:** lucide-react, spinners-react  
+- **Icons/Components:** lucide-react, spinners-react
+
+---
 
 🔑 Core Flow
 User selects a mood → app calls /api/mood → fetches recommendations from Spotify.
