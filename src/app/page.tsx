@@ -88,13 +88,13 @@ export default function Page() {
           <h1 className="text-4xl mb-2 font-honk font-extrabold tracking-wider">
             Select Mood
           </h1>
-          <Link href={"/fav"}>
+          {/*<Link href={"/fav"}>
             <button className="px-3 mb-2 flex flex-row gap-2 items-center rounded-xl  bg-white/30 hover:bg-white/50 transition-all duration-300 border border-white/20 cursor-pointer hover:scale-105">
               <h1 className="text-xl font-honk">Favourites here</h1>
               <LucideHeart className="hover:scale-120 hover:rotate-6 transition-transform mt-2 cursor-pointer mb-2"></LucideHeart>
             </button>
           </Link>
-        </div>
+        </div>*/}
         <div className="flex flex-wrap gap-2 mb-4 font-mono font-extrabold tracking-widest">
           {[...moods, ...recm].map((m) => {
             const isActive = m === mood;
