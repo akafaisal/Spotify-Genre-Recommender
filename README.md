@@ -42,8 +42,3 @@ A **Next.js + TypeScript** app that recommends **Spotify tracks** based on user-
 
 
 
-
-
-
-
-     ----
