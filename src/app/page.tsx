@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { LucideHeart } from "lucide-react";
 import { SpinnerCircular } from "spinners-react";
-import Link from "next/link";
+{/*import Link from "next/link";*/}
 
 
 // Define types
