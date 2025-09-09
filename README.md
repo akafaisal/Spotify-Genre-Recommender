@@ -25,16 +25,16 @@ A **Next.js + TypeScript** app that recommends **Spotify tracks** based on user-
 ---
 
 ## 🔑 Core Flow
-User selects a mood → app calls /api/mood → fetches recommendations from Spotify.
-User likes a track → related artist genres are saved into MongoDB.
-Future requests use stored genres to generate richer, more adaptive recommendations.
-Clicking a track → toggles like, double-click → opens it on Spotify.
+- User selects a mood → app calls /api/mood → fetches recommendations from Spotify.
+- User likes a track → related artist genres are saved into MongoDB.
+- Future requests use stored genres to generate richer, more adaptive recommendations.
+- Clicking a track → toggles like, double-click → opens it on Spotify.
 
 ## 📌 Roadmap
- Add NextAuth Spotify login for personalized user sessions.
- Enable playlist creation/export to Spotify directly.
- Improve recommendation algorithm (tempo, popularity, etc.).
- Add UI for managing liked tracks & genres.
+ - Add NextAuth Spotify login for personalized user sessions.
+ - Enable playlist creation/export to Spotify directly.
+ - Improve recommendation algorithm (tempo, popularity, etc.).
+ - Add UI for managing liked tracks & genres.
 
 ## 🤝 Contributing
 Pull requests are welcome! Open an issue first for major changes.
