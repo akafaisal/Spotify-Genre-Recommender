@@ -22,7 +22,8 @@ A **Next.js + TypeScript** app that recommends **Spotify tracks** based on user-
 - **API:** Spotify Web API (Client Credentials flow)  
 - **Icons/Components:** lucide-react, spinners-react  
 
----
+
+
 📂 Project Structure
 📁 src/
  ├── app/
@@ -39,6 +40,4 @@ A **Next.js + TypeScript** app that recommends **Spotify tracks** based on user-
  │
  └── lib/
      └── mongodb_spotify.ts # MongoDB connection utility
-
-
 
