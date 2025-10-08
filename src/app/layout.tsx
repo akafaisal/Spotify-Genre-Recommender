@@ -15,13 +15,19 @@ export default function RootLayout({
     <html lang="en">
       <head>
         {/* Google Analytics Tag */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-TP5LP3NSM2"></script>
-        <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-TP5LP3NSM2');
-        </script>
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-TP5LP3NSM2"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-TP5LP3NSM2');
+          `}
+        </Script>
       </head>
       <body>
         <div className="bg-gradient-to-r from-purple-900 to-red-500 animate-gradient-x min-h-screen text-white pl-15">
