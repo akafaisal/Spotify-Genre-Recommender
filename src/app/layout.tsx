@@ -2,8 +2,23 @@ import "./globals.css";
 import Script from "next/script";
 
 export const metadata = {
-  title: "Spotify Mood Selector",
-  description: "Select your mood and get personalized recommendations",
+  title: "Spotify Genrify | Mood Selector & Genre Recommender",
+  description:
+    "Spotify Genrify lets you select your mood and discover personalized Spotify genre recommendations. Try Spotify Genrify now.",
+  keywords: [
+    "Spotify Genrify",
+    "Spotify Mood Selector",
+    "Spotify genre recommender",
+    "Spotify playlist generator",
+    "mood based music",
+  ],
+  openGraph: {
+    title: "Spotify Genrify | Mood Selector & Genre Recommender",
+    description: "Discover new Spotify genres that match your mood with Spotify Genrify.",
+    url: "https://spotify-genrify.vercel.app",
+    type: "website",
+  },
+  metadataBase: new URL("https://spotify-genrify.vercel.app"),
 };
 
 export default function RootLayout({
