@@ -20,6 +20,14 @@ export const metadata = {
     description: "Discover new Spotify genres that match your mood with Spotify Genrify.",
     url: "https://spotify-genrify.vercel.app",
     type: "website",
+    images: [
+      {
+        url: "/favicon.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: "en_US",
   },
   metadataBase: new URL("https://spotify-genrify.vercel.app"),
 };
