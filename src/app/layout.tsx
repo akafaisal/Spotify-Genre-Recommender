@@ -2,6 +2,9 @@ import "./globals.css";
 import Script from "next/script";
 
 export const metadata = {
+  icons: {
+    icon: "/favicon.png",
+  },
   title: "Spotify Genrify | Mood Selector & Genre Recommender",
   description:
     "Spotify Genrify lets you select your mood and discover personalized Spotify genre recommendations. Try Spotify Genrify now.",
