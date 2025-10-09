@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://spotify-genrify.vercel.app
+
+# Sitemaps
+Sitemap: https://spotify-genrify.vercel.app/sitemap.xml
