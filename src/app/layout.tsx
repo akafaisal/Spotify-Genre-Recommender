@@ -5,9 +5,9 @@ export const metadata = {
   icons: {
     icon: "/favicon.png",
   },
-  title: "Spotify Genrify | Mood Selector & Genre Recommender",
+  title: "Spotify Genrify: Mood Selector & Genre Recommender",
   description:
-    "Spotify Genrify lets you select your mood and discover personalized Spotify genre recommendations. Try Spotify Genrify now.",
+    "Tap your mood and discover new Genres. Try Spotify Genrify now.",
   keywords: [
     "Spotify Genrify",
     "Spotify Mood Selector",
@@ -16,8 +16,9 @@ export const metadata = {
     "mood based music",
   ],
   openGraph: {
-    title: "Spotify Genrify | Mood Selector & Genre Recommender",
-    description: "Discover new Spotify genres that match your mood with Spotify Genrify.",
+    title: "Spotify Genrify: Mood Selector & Genre Recommender",
+    description:
+      "Discover new Spotify genres that match your mood with Spotify Genrify.",
     url: "https://spotify-genrify.vercel.app",
     type: "website",
     images: [
