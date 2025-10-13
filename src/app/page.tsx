@@ -2,9 +2,21 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { LucideHeart } from "lucide-react";
+import { SquareMenu } from "lucide-react";
 import { SpinnerCircular } from "spinners-react";
-{/*import Link from "next/link";*/}
+import Link from "next/link";
+{
+  /*import Link from "next/link";*/
+}
 
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 // Define types
 type Track = {
@@ -79,50 +91,73 @@ export default function Page() {
     }
   };
 
-
-
   return (
     <>
-      <div className="md:px-4 md:pt-6 px-4 pt-2 bg-gradient-to-br min-h-screen ">
-        <div className="flex flex-row justify-between max-w-10/11 ">
-          <h1 className="text-4xl mb-2 font-honk font-extrabold tracking-wider">
-            Select Mood
-          </h1>
-          {/*<Link href={"/fav"}>
+      <Sheet>
+        <SheetTrigger>
+          <SquareMenu className=" fixed right-1 top-1/2 w-12 h-12 lg:w-15 h-15 z-1 fill-white/60 text-black hover:scale-110 hover:rotate-3 transition-transform cursor-pointer" />
+        </SheetTrigger>
+        <SheetContent
+          side="right"
+          className="bg-white/30  border-black rounded-tl-lg h-full w-[50%] md:w-1/4 lg:w-1/6 mt-4 "
+        >
+          <SheetHeader className="mt-6">
+            <SheetTitle className="font-honk text-2xl hover:scale-103 transition-transform">
+              <Link href="/privacy-policy">Privacy Policy</Link>
+            </SheetTitle>
+            <SheetTitle className="font-honk text-2xl hover:scale-103 transition-transform">
+              <Link href="/about">About Us</Link>
+            </SheetTitle>
+            <SheetTitle className="font-honk text-2xl hover:scale-103 transition-transform">
+              <Link href="/contact">Contact Us</Link>
+            </SheetTitle>
+          </SheetHeader>
+        </SheetContent>
+      </Sheet>
+
+      <div className=" lg:ml-15  md:px-4 md:pt-6 px-4 pt-2 bg-gradient-to-br min-h-screen max-w-12/13 ">
+        <div className="bg-white/15 rounded-3xl p-4 mb-4 max-w-12/13">
+          <div>
+            <h1 className="text-4xl mb-2 font-honk font-extrabold tracking-wider">
+              Select Mood
+            </h1>
+
+            {/*<Link href={"/fav"}>
             <button className="px-3 mb-2 flex flex-row gap-2 items-center rounded-xl  bg-white/30 hover:bg-white/50 transition-all duration-300 border border-white/20 cursor-pointer hover:scale-105">
               <h1 className="text-xl font-honk">Favourites here</h1>
-              <LucideHeart className="hover:scale-120 hover:rotate-6 transition-transform mt-2 cursor-pointer mb-2"></LucideHeart>
+              <LucideHeart className="hover:scale-120 hover:rotate-6 transition-transform  cursor-pointer mb-2"></LucideHeart>
             </button>
           </Link>*/}
-        </div>
-        <div className="flex flex-wrap gap-2 mb-4 font-mono font-extrabold tracking-widest">
-          {[...moods, ...recm].map((m) => {
-            const isActive = m === mood;
-            const isNew = latestGenres.has(m);
-            return (
-              <button
-                key={m}
-                onClick={() => {
-                  if (isActive) {
-                    setRefreshCount((prev) => prev + 1);
-                  } else {
-                    setMood(m);
-                  }
-                }}
-                className={`px-3 py-1 rounded-md md:text-center text-left cursor-pointer min-w-[30%] ${
-                  isActive && isNew
-                    ? "bg-purple-800 animate-pulse"
-                    : isActive
-                    ? "bg-green-600"
-                    : isNew
-                    ? "bg-amber-600 animate-pulse"
-                    : "bg-black"
-                } text-white`}
-              >
-                {m}
-              </button>
-            );
-          })}
+          </div>
+          <div className="flex flex-wrap gap-2 mb-4 font-mono font-extrabold tracking-widest">
+            {[...moods, ...recm].map((m) => {
+              const isActive = m === mood;
+              const isNew = latestGenres.has(m);
+              return (
+                <button
+                  key={m}
+                  onClick={() => {
+                    if (isActive) {
+                      setRefreshCount((prev) => prev + 1);
+                    } else {
+                      setMood(m);
+                    }
+                  }}
+                  className={`px-3 py-1 rounded-md md:text-center text-left cursor-pointer min-w-[30%] ${
+                    isActive && isNew
+                      ? "bg-purple-800 animate-pulse"
+                      : isActive
+                      ? "bg-green-600"
+                      : isNew
+                      ? "bg-amber-600 animate-pulse"
+                      : "bg-black"
+                  } text-white`}
+                >
+                  {m}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {loading ? (
@@ -141,7 +176,7 @@ export default function Page() {
             </div>
           </div>
         ) : (
-          <div className="flex flex-wrap gap-4 backdrop-blur-3xl ">
+          <div className="flex flex-wrap gap-4 backdrop-blur-xl ">
             {tracks.map((t) => (
               <div
                 key={t.id}
@@ -175,7 +210,7 @@ export default function Page() {
                   </div>
                   <div className="md:ml-auto ">
                     <button
-                      className="rounded"
+                      className="focus:outline focus:rounded- hover:scale-110 transition-transform "
                       onClick={(e) => {
                         e.stopPropagation();
                         handleLike(t.id, t.artists[0].id);
@@ -185,7 +220,7 @@ export default function Page() {
                         className={
                           liked[t.id]
                             ? "mt-4 mr-1 scale-140 transition-all  hover:rotate-6 transition-transform cursor-pointer "
-                            : "hover:scale-120 hover:rotate-6 transition-transform mt-2 cursor-pointer mt-4 scale-120 mr-1"
+                            : "hover:scale-120 hover:rotate-6 transition-transform cursor-pointer mt-4 scale-120 mr-1"
                         }
                         color={liked[t.id] ? "red" : "grey"}
                         fill={liked[t.id] ? "red" : "none"}
