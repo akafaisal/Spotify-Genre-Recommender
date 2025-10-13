@@ -35,6 +35,7 @@ export default function Page() {
   const [recm, setRecm] = useState<Set<string>>(new Set());
   const [latestGenres, setLatestGenres] = useState<Set<string>>(new Set());
   const moods = ["sad", "happy", "workout", "chill", "new"];
+  const [visibleCount, setVisibleCount] = useState(8);
 
   const getTracks = async (mood: string) => {
     try {
@@ -63,6 +64,7 @@ export default function Page() {
 
   useEffect(() => {
     setLoading(true);
+    setVisibleCount(8); // ✅ reset to 8 on new mood
     getTracks(mood);
   }, [mood, refreshCount]);
 
@@ -90,8 +92,26 @@ export default function Page() {
     }
   };
 
+  // Update visibleCount based on screen size
+  const visibleTracks = tracks.slice(0, visibleCount);
+  useEffect(() => {
+    if (typeof window === "undefined") return; // ✅ ensure client-side only
+
+    const handleScroll = () => {
+      const bottom =
+        window.innerHeight + window.scrollY >= document.body.offsetHeight - 200;
+      if (bottom) {
+        setVisibleCount((prev) => Math.min(prev + 8, tracks.length));
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [tracks]);
+
   return (
     <>
+      {/* Sheet for side menu */}
       <Sheet>
         <SheetTrigger>
           <div className="fixed right-1 top-1/2 z-10 cursor-pointer rounded-2xl bg-white/30 px-2 py-3 text-black transition-transform duration-300 hover:scale-110 hover:rotate-3">
@@ -130,6 +150,8 @@ export default function Page() {
         </SheetContent>
       </Sheet>
 
+      {/*main content*/}
+
       <div className=" lg:ml-15  md:px-4 md:pt-6 px-4 pt-2 bg-gradient-to-br min-h-screen max-w-12/13 ">
         <div className="bg-white/15 rounded-3xl p-4 mb-4 max-w-12/13">
           <div>
@@ -158,7 +180,7 @@ export default function Page() {
                       setMood(m);
                     }
                   }}
-                  className={`px-3 py-1 rounded-md md:text-center text-left cursor-pointer min-w-[30%] ${
+                  className={`px-3 py-1 rounded-md md:text-center text-left cursor-pointer min-w-[30%] hover:bg-zinc-800 transition-all ${
                     isActive && isNew
                       ? "bg-purple-800 animate-pulse"
                       : isActive
@@ -192,7 +214,7 @@ export default function Page() {
           </div>
         ) : (
           <div className="flex flex-wrap gap-4 backdrop-blur-xl ">
-            {tracks.map((t) => (
+            {visibleTracks.map((t) => (
               <div
                 key={t.id}
                 onClick={() => {
@@ -247,6 +269,12 @@ export default function Page() {
             ))}
           </div>
         )}
+        {visibleCount < tracks.length && (
+          <div className="text-center w-full py-6 text-zinc-400 animate-pulse">
+            Loading more...
+          </div>
+        )}
+        <div className="flex flex-wrap gap-4 backdrop-blur-xl pb-20"></div>
       </div>
     </>
   );

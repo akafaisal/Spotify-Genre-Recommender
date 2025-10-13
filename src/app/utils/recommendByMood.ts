@@ -2,11 +2,16 @@ import { getSpotifyToken } from "./getSpotifyToken";
 import Moody from "../../models/Spotify";
 import connectMongo from "@/lib/connect_mongodb";
 
-const searchSpotify = async (keyword: string, token: string) => {
+// Search Spotify tracks with optional offset
+const searchSpotify = async (
+  keyword: string,
+  token: string,
+  offset: number
+) => {
   const res = await fetch(
     `https://api.spotify.com/v1/search?q=${encodeURIComponent(
       keyword
-    )}&type=track&limit=10&sort=recent`,
+    )}&type=track&limit=48&offset=${offset}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -21,7 +26,7 @@ export const recommendByMood = async (mood: string) => {
   const token = await getSpotifyToken();
   await connectMongo();
 
-  // Ensure "liked" doc exists
+  // Ensure "liked" document exists
   let likedDoc = await Moody.findOne({ name: "liked" });
   if (!likedDoc) {
     await Moody.create({ name: "liked", genres: [] });
@@ -37,8 +42,7 @@ export const recommendByMood = async (mood: string) => {
   let genresToSearch: string[];
 
   if (mood === "liked") {
-    // refresh to get latest liked list
-    likedDoc = await Moody.findOne({ name: "liked" });
+    likedDoc = await Moody.findOne({ name: "liked" }); // refresh to get latest liked list
     genresToSearch = likedDoc?.genres || [];
   } else {
     const moodDoc = await Moody.findOne({ name: mood });
@@ -48,8 +52,7 @@ export const recommendByMood = async (mood: string) => {
   // Remove duplicates
   genresToSearch = [...new Set(genresToSearch)];
 
-  // Search Spotify for each unique genre
-
+  // Track interface
   interface Track {
     id: string;
     name: string;
@@ -61,13 +64,26 @@ export const recommendByMood = async (mood: string) => {
     previewUrl: string | null;
     durationMs: number;
   }
-  
+
+  // Collect tracks without duplicates
   const results: Track[] = [];
-  for (const keyword of genresToSearch) {
-    const tracks = await searchSpotify(keyword, token);
-    results.push(...tracks);
+  const seenTrackIds = new Set<string>();
+
+  for (let i = 0; i < 2; i++) {
+    // two runs
+    for (const keyword of genresToSearch) {
+      const offset = i * 48; // fetch different pages
+      const tracks = await searchSpotify(keyword, token, offset);
+
+      for (const track of tracks) {
+        if (!seenTrackIds.has(track.id)) {
+          seenTrackIds.add(track.id);
+          results.push(track);
+        }
+      }
+    }
   }
 
-  // Shuffle and return top 8
-  return results.sort(() => 0.5 - Math.random()).slice(0, 8);
+  // Shuffle and return top 50
+  return results.sort(() => 0.5 - Math.random()).slice(0, 100);
 };
