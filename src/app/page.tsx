@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { LucideHeart } from "lucide-react";
-import { SquareMenu } from "lucide-react";
+import { SquareMenu, Github } from "lucide-react";
 import { SpinnerCircular } from "spinners-react";
 import Link from "next/link";
 {
@@ -94,7 +94,10 @@ export default function Page() {
     <>
       <Sheet>
         <SheetTrigger>
-          <SquareMenu className=" fixed right-1 top-1/2 w-12 h-12 lg:w-15 h-15 z-1 fill-white/60 text-black hover:scale-110 hover:rotate-3 transition-transform cursor-pointer" />
+          <div className="fixed right-1 top-1/2 z-10 cursor-pointer rounded-2xl bg-white/30 px-2 py-3 text-black transition-transform duration-300 hover:scale-110 hover:rotate-3">
+            <SquareMenu className=" w-12 h-15 lg:w-15" />
+            <div className="font-honk -mt-3 lg:-mt-2 ">Menu</div>
+          </div>
         </SheetTrigger>
         <SheetContent
           side="right"
@@ -109,6 +112,19 @@ export default function Page() {
             </SheetTitle>
             <SheetTitle className="font-honk text-2xl hover:scale-103 transition-transform">
               <Link href="/contact">Contact Us</Link>
+            </SheetTitle>
+
+            <SheetTitle className=" hover:scale-103 transition-transform mt-3">
+              <a
+                href="https://github.com/akafaisal/Spotify-Genre-Recommender"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center p-2 rounded-xl bg-zinc-900 hover:bg-zinc-800 transition-all duration-300 transformshadow-sm hover:shadow-md"
+                title="View on GitHub"
+              >
+                <Github className="w-5 h-5 text-white " />
+                <div className="pl-2 font-honk">Github</div>
+              </a>
             </SheetTitle>
           </SheetHeader>
         </SheetContent>
@@ -218,7 +234,7 @@ export default function Page() {
                       <LucideHeart
                         className={
                           liked[t.id]
-                            ? "mt-4 mr-1 scale-140 transition-all  hover:rotate-6 transition-transform cursor-pointer "
+                            ? "mt-4 mr-1 scale-140 transition-all  hover:rotate-6  cursor-pointer "
                             : "hover:scale-120 hover:rotate-6 transition-transform cursor-pointer mt-4 scale-120 mr-1"
                         }
                         color={liked[t.id] ? "red" : "grey"}
