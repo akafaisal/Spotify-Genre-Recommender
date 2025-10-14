@@ -171,3 +171,7 @@
     transform: scale(1.15);
   }
 }
+
+html {
+  scroll-behavior: smooth;
+}

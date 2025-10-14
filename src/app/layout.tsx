@@ -90,7 +90,7 @@ export default function RootLayout({
           ></iframe>
         </noscript>
 
-        <div className="bg-gradient-to-r from-purple-900 to-red-500 animate-gradient-x min-h-screen text-white pl-15 ">
+        <div className="bg-gradient-to-r from-purple-900 to-red-500 animate-gradient-x min-h-screen text-white  ">
           {children}
         </div>
       </body>
