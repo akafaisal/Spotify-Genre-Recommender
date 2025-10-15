@@ -9,7 +9,7 @@ const AboutSection = () => {
         {/* Main content */}
         <Image
           src="/logo.png" // path from /public
-          alt="Cool photo"
+          alt="Logo image"
           width={400}
           height={400}
           className="rounded-2xl  sticky mx-auto -mt-28 "
@@ -49,7 +49,9 @@ const AboutSection = () => {
         </div>
 
         {/* Disclaimer pinned at bottom */}
-        <div className=""></div>
+        <footer className="w-full italic py-6 absolute bottom-0 left-0 text-center text-sm text-gray-300 ">
+          © 2025 Genrify.live
+        </footer>
       </section>
     </div>
   );

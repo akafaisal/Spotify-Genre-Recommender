@@ -32,10 +32,6 @@ const Menu = () => {
               </SheetTitle>
 
               <SheetTitle className="font-honk text-2xl hover:scale-103 transition-transform">
-                <Link href="/about">About Us</Link>
-              </SheetTitle>
-
-              <SheetTitle className="font-honk text-2xl hover:scale-103 transition-transform">
                 <Link href="/contact">Contact Us</Link>
               </SheetTitle>
 
@@ -50,6 +46,11 @@ const Menu = () => {
                   <Github className="w-5 h-5 text-white" />
                   <div className="pl-2 font-honk">Github</div>
                 </a>
+              </SheetTitle>
+              <SheetTitle className="mt-3 text-white">
+                Spotify™ is a registered trademark of Spotify AB.
+                <br />
+                <br />© 2025 Genrify.live — Not affiliated with Spotify.
               </SheetTitle>
             </SheetHeader>
           </SheetContent>

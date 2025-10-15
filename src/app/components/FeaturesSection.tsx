@@ -124,7 +124,7 @@ export default function FeaturesSection() {
             </div>
             <div className="flex flex-row justify-center items-center">
               <h1 className="text-4xl mb-2 font-honk font-extrabold tracking-wider mr-2">
-                Select Mood
+                ✨ Select Mood
               </h1>
 
               {/*Popover for how to use*/}
