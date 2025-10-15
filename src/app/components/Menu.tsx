@@ -16,7 +16,7 @@ const Menu = () => {
       <div className="ml-16">
         <Sheet>
           <SheetTrigger>
-            <div className="cursor-pointer rounded-2xl bg-white/30 px-2 py-3 text-black transition-all   ">
+            <div className="cursor-pointer rounded-br-3xl bg-white/30 px-2 py-3 text-black transition-all   ">
               <SquareMenu className="w-12 h-12 lg:w-16 lg:h-16" />
               <div className="font-honk -mt-3 lg:-mt-2">Menu</div>
             </div>

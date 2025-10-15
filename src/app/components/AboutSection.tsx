@@ -34,18 +34,22 @@ const AboutSection = () => {
             Genrify.live recommends songs, artists & playlists based on your
             favorite genres — powered by Spotify’s music intelligence.
           </p>
-          <Link href="/#features">
-            <button className="bg-black px-6 py-3 rounded-full text-3xl hover:bg-white/30 scale-105 transition-all duration-500 cursor-pointer font-honk">
-              🎧 Try Now
-            </button>
-          </Link>
+          <div className="flex flex-col justify-center gap-5">
+            <Link href="/#features">
+              <button className="bg-black px-6 py-3 rounded-full text-5xl hover:bg-zinc-900 hover:scale-105  transition-all duration-200 cursor-pointer font-honk">
+                🎧 Try Now
+              </button>
+            </Link>
+            <Link href="/#working">
+              <button className="bg-white/30 px-6 py-3 rounded-full text-l hover:bg-white/50  hover:scale-105 transition-all duration-200 cursor-pointer italic font-bold">
+                🎼 How it Works?
+              </button>
+            </Link>
+          </div>
         </div>
 
         {/* Disclaimer pinned at bottom */}
-        <p className="text-sm italic text-gray-300  border-white/30 mt-8 pt-4">
-          This project is not affiliated with Spotify. It simply uses the
-          Spotify Web API for educational purpose.
-        </p>
+        <div className=""></div>
       </section>
     </div>
   );

@@ -7,10 +7,10 @@ import { Info } from "lucide-react";
 import { SpinnerCircular } from "spinners-react";
 import Menu from "./Menu";
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from "@/components/ui/popover";
 
 {
   /*import Link from "next/link";*/
@@ -126,12 +126,16 @@ export default function FeaturesSection() {
               <h1 className="text-4xl mb-2 font-honk font-extrabold tracking-wider mr-2">
                 Select Mood
               </h1>
-              <Tooltip>
-                <TooltipTrigger className="mb-1.5 hover:scale-110 hover:rotate-2 transition-transform  cursor-pointer">
-                  <Info className="text-white" />
-                </TooltipTrigger>
-                <TooltipContent className="p-5 pb-6 font-extrabold ">
-                  <p className="font-honk text-lg -mb-1 ">HOW TO USE?</p>
+
+              {/*Popover for how to use*/}
+              <Popover>
+                <PopoverTrigger>
+                  <div className="mb-1.5 hover:scale-110 hover:rotate-2 transition-transform cursor-pointer">
+                    <Info className="text-white" />
+                  </div>
+                </PopoverTrigger>
+                <PopoverContent className="p-5 pb-6 font-extrabold w-75 bg-black text-white">
+                  <p className="font-honk text-lg -mb-1">HOW TO USE?</p>
                   <p>
                     Single Tap: <span className="italic">💗Like a Song</span>
                   </p>
@@ -139,8 +143,8 @@ export default function FeaturesSection() {
                     Double Tap:{" "}
                     <span className="italic">🎵Open in Spotify</span>
                   </p>
-                </TooltipContent>
-              </Tooltip>
+                </PopoverContent>
+              </Popover>
 
               {/*<Link href={"/fav"}>
             <button className="px-3 mb-2 flex flex-row gap-2 items-center rounded-xl  bg-white/30 hover:bg-white/50 transition-all duration-300 border border-white/20 cursor-pointer hover:scale-105">
@@ -253,8 +257,8 @@ export default function FeaturesSection() {
             </div>
           )}
           {visibleCount < tracks.length && (
-            <div className="text-center w-full py-6 text-zinc-400 animate-pulse">
-              Loading more...
+            <div className=" w-10 h-10 pl-3.5 pt-1.5  animate-pulse bg-white/30 rounded-3xl mt-6  ">
+              ...
             </div>
           )}
           <div className="flex flex-wrap gap-4 backdrop-blur-xl pb-20"></div>
