@@ -8,7 +8,8 @@ import {
 export default function Working() {
   return (
     <>
-      <div className="fixed left-1/2 top-0 h-full w-[2px] bg-blue-500 -translate-x-1/2"></div>
+      {/*VERTICAL CENTER LINE FOR REFERENCE*/}
+      {/*<div className="fixed left-1/2 top-0 h-full w-[2px] bg-blue-500 -translate-x-1/2"></div>*/}
       <Accordion
         type="single"
         collapsible
