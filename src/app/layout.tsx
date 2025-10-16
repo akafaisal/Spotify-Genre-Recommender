@@ -2,35 +2,45 @@ import "./globals.css";
 import Script from "next/script";
 
 export const metadata = {
-  icons: {
-    icon: "/favicon.png",
-  },
-  title: "Spotify Genrify: Mood Selector & Genre Recommender",
+  metadataBase: new URL("https://spotify-genrify.vercel.app"),
+  title: "Genrify: Mood Selector & Genre Recommender",
   description:
-    "Tap your mood and discover new Genres. Try Spotify Genrify now.",
+    "Tap your mood and discover new Spotify genres. Try Genrify now!",
   keywords: [
-    "Spotify Genrify",
-    "Spotify Mood Selector",
-    "Spotify genre recommender",
-    "Spotify playlist generator",
-    "mood based music",
+    "Genrify",
+    "Genrify Mood Selector",
+    "Genrify Genre Recommender",
+    "Genrify Playlist Generator",
+    "Mood Based Music",
   ],
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png", // optional but helps
+  },
   openGraph: {
-    title: "Spotify Genrify: Mood Selector & Genre Recommender",
+    title: "Genrify: Mood Selector & Genre Recommender",
     description:
-      "Discover new Spotify genres that match your mood with Spotify Genrify.",
-    url: "https://spotify-genrify.vercel.app",
+      "Discover new Spotify genres that match your mood with Genrify.live",
+    url: "https://genrify.live",
+    siteName: "Genrify.live",
     type: "website",
     images: [
       {
-        url: "/favicon.png",
+        url: "https://genrify.live/og-image.png", // ✅ must be absolute URL
         width: 1200,
         height: 630,
+        alt: "Genrify.live – Mood-based Music Recommender",
       },
     ],
     locale: "en_US",
   },
-  metadataBase: new URL("https://spotify-genrify.vercel.app"),
+  twitter: {
+    card: "summary_large_image",
+    title: "Genrify: Mood Selector & Genre Recommender",
+    description: "Tap your mood and discover new Spotify genres with Genrify.",
+    images: ["https://genrify.live/og-image.png"],
+  },
 };
 
 export default function RootLayout({
