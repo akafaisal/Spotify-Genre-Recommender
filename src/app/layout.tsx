@@ -2,7 +2,7 @@ import "./globals.css";
 import Script from "next/script";
 
 export const metadata = {
-  metadataBase: new URL("https://spotify-genrify.vercel.app"),
+  metadataBase: new URL("https://genrify.live"),
   title: "Genrify: Mood Selector & Genre Recommender",
   description:
     "Tap your mood and discover new Spotify genres. Try Genrify now!",
