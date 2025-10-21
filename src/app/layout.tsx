@@ -90,6 +90,12 @@ export default function RootLayout({
       </head>
 
       <body>
+        {/* ✅ Spotify Embed API (STEP 1) */}
+        <Script
+          src="https://open.spotify.com/embed/iframe-api/v1"
+          async
+        ></Script>
+
         {/* ✅ GTM Noscript Fallback */}
         <noscript>
           <iframe

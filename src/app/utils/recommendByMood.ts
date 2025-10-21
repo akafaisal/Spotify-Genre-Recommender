@@ -69,21 +69,21 @@ export const recommendByMood = async (mood: string) => {
   const results: Track[] = [];
   const seenTrackIds = new Set<string>();
 
-  for (let i = 0; i < 2; i++) {
-    // two runs
-    for (const keyword of genresToSearch) {
-      const offset = i * 48; // fetch different pages
-      const tracks = await searchSpotify(keyword, token, offset);
-
-      for (const track of tracks) {
-        if (!seenTrackIds.has(track.id)) {
-          seenTrackIds.add(track.id);
-          results.push(track);
-        }
+  // Only one run: offset = 0
+  for (const keyword of genresToSearch) {
+    const tracks = await searchSpotify(keyword, token, 0); // fetch first 48 tracks only
+    for (const track of tracks) {
+      if (!seenTrackIds.has(track.id)) {
+        seenTrackIds.add(track.id);
+        results.push(track);
       }
     }
   }
 
   // Shuffle and return top 50
-  return results.sort(() => 0.5 - Math.random()).slice(0, 100);
+  const recommendedTracks = results
+    .sort(() => 0.5 - Math.random())
+    .slice(0, 100);
+  console.log("Recommended Tracks:", recommendedTracks);
+  return recommendedTracks;
 };

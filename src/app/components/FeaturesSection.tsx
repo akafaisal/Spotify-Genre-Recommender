@@ -4,13 +4,13 @@ import Image from "next/image";
 import { LucideHeart } from "lucide-react";
 import { Info } from "lucide-react";
 
-import { SpinnerCircular } from "spinners-react";
 import Menu from "./Menu";
 import {
   Popover,
   PopoverTrigger,
   PopoverContent,
 } from "@/components/ui/popover";
+import SpotifyEmbed from "./Spotify-embed";
 
 {
   /*import Link from "next/link";*/
@@ -100,13 +100,17 @@ export default function FeaturesSection() {
       const bottom =
         window.innerHeight + window.scrollY >= document.body.offsetHeight - 200;
       if (bottom) {
-        setVisibleCount((prev) => Math.min(prev + 8, tracks.length));
+        setVisibleCount((prev) => Math.min(prev + 64, tracks.length));
       }
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [tracks]);
+
+  // Spotify Embed state (not fully utilized in this snippet)
+
+  const [currentTrackUri, setCurrentTrackUri] = useState<string>();
 
   return (
     <>
@@ -116,11 +120,11 @@ export default function FeaturesSection() {
 
       {/*main content*/}
       <section className="relative">
-        <div className="px-4 pt-2 md:pt-6 bg-gradient-to-br min-h-screen  ">
+        <div className="px-4 pt-2 md:pt-6 bg-gradient-to-br min-h-screen">
           <div className="bg-white/15 rounded-3xl p-4 mb-4 max-w-12/13">
             <div>
-              <div className=" blob absolute blur-[1px] rotate-45 md:-left-20 w-[250px] h-[200px] bg-white/30 opacity-60 rounded-full pointer-events-none" />
-              <div className="hidden md:block blob blob2 absolute blur-[1px] top-100 right-70 w-[600px] h-[800px] bg-white/30 opacity-60 rounded-full pointer-events-none" />
+              <div className=" blob pointer-events-none absolute blur-[1px] rotate-45 md:-left-20 w-[250px] h-[200px] bg-white/30 opacity-60 rounded-full " />
+              <div className="hidden  md:block blob blob2 absolute blur-[1px] top-100 right-70 w-[600px] h-[800px] bg-white/30 opacity-60 rounded-full pointer-events-none" />
             </div>
             <div className="flex flex-row justify-center items-center">
               <h1 className="text-4xl mb-2 font-honk font-extrabold tracking-wider mr-2">
@@ -167,14 +171,14 @@ export default function FeaturesSection() {
                         setMood(m);
                       }
                     }}
-                    className={`px-3 py-1 rounded-md md:text-center text-left cursor-pointer min-w-[30%] hover:bg-zinc-800 transition-all ${
+                    className={`px-3 py-1 rounded-md md:text-center text-left cursor-pointer min-w-[30%]  transition-all ${
                       isActive && isNew
                         ? "bg-purple-800 animate-pulse"
                         : isActive
                         ? "bg-green-600"
                         : isNew
                         ? "bg-amber-600 animate-pulse"
-                        : "bg-black"
+                        : "bg-black hover:bg-zinc-800"
                     } text-white`}
                   >
                     {m}
@@ -185,17 +189,16 @@ export default function FeaturesSection() {
           </div>
 
           {loading ? (
-            <div className="flex items-center justify-center  bg-white/30 rounded-2xl h-screen w-[91.4%]">
-              <div className="animate-[bassPulse_2s_ease-in-out_infinite] flex flex-col items-center">
+            <div className="flex items-center justify-center min-h-screen bg-white/30 rounded-2xl  w-[91.4%]">
+              <div className="wobble flex flex-col items-center">
                 <h1 className="font-honk text-2xl ">Loading...</h1>
 
-                <SpinnerCircular
-                  size={90}
-                  thickness={80}
-                  speed={100}
-                  color="#090909"
-                  secondaryColor="rgb(255, 255, 255)"
-                  enabled={true}
+                <Image
+                  src="/android-chrome-512x512.png"
+                  alt="Logo image"
+                  width={100}
+                  height={100}
+                  className=" rounded-2xl  "
                 />
               </div>
             </div>
@@ -204,8 +207,15 @@ export default function FeaturesSection() {
               {visibleTracks.map((t) => (
                 <div
                   key={t.id}
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.stopPropagation();
                     handleLike(t.id, t.artists[0].id);
+
+                    // Add to queue if not already in
+                    setCurrentTrackUri(() => {
+                      const uri = `spotify:track:${t.id}`;
+                      return uri;
+                    });
                   }}
                   onDoubleClick={() => {
                     window.open(
@@ -214,27 +224,30 @@ export default function FeaturesSection() {
                       "noopener,noreferrer"
                     );
                   }}
-                  className=" w-[45%] sm:w-[30%] md:w-[22%] rounded-xl p-6 bg-white/5 hover:bg-white/20 transition-all duration-300 border border-white/20 cursor-pointer hover:scale-105"
+                  className={`w-[45%] sm:w-[30%] md:w-[22%] rounded-xl hover:scale-105 p-6  transition-all  duration-200 border cursor-pointer  border-white 
+    ${
+      liked[t.id]
+        ? "bg-black border-white "
+        : "bg-white/5 hover:bg-white/20 hover:scale-105"
+    }`}
                 >
                   <Image
                     src={t.album.images[0].url}
                     alt={t.name}
                     width={300}
                     height={300}
-                    className="w-full h-auto rounded-xl transition-all duration-1000 object-cover shadow-lg"
+                    className="w-full h-auto rounded-xl transition-all duration-100 object-cover shadow-lg border-2 border-white/50"
                   />
                   <div className="flex md:flex-row mt-2 flex-col items-center ">
-                    <div className="mt-2 text-sm ">
-                      <div className="font-bold text-zinc-100 line-clamp-1">
-                        {t.name}
-                      </div>
-                      <div className="text-gray-300 font-light line-clamp-1">
+                    <div className="mt-2 text-sm  md:w-5/6">
+                      <div className="font-bold text-zinc-100 ">{t.name}</div>
+                      <div className="text-gray-300 font-light ">
                         {t.artists[0].name}
                       </div>
                     </div>
                     <div className="md:ml-auto ">
                       <button
-                        className="focus:outline focus:rounded- hover:scale-110 transition-transform "
+                        className="  hover:scale-110 transition-transform "
                         onClick={(e) => {
                           e.stopPropagation();
                           handleLike(t.id, t.artists[0].id);
@@ -244,9 +257,9 @@ export default function FeaturesSection() {
                           className={
                             liked[t.id]
                               ? "mt-4 mr-1 scale-140 transition-all  hover:rotate-6  cursor-pointer "
-                              : "hover:scale-120 hover:rotate-6 transition-transform cursor-pointer mt-4 scale-120 mr-1"
+                              : "hover:scale-120 hover:rotate-6 transition-all duration-100 cursor-pointer mt-4 scale-120 mr-1 "
                           }
-                          color={liked[t.id] ? "red" : "grey"}
+                          color={liked[t.id] ? " red" : "white"}
                           fill={liked[t.id] ? "red" : "none"}
                         />
                       </button>
@@ -256,13 +269,12 @@ export default function FeaturesSection() {
               ))}
             </div>
           )}
-          {visibleCount < tracks.length && (
-            <div className=" w-10 h-10 pl-3.5 pt-1.5  animate-pulse bg-white/30 rounded-3xl mt-6  ">
-              ...
-            </div>
-          )}
-          <div className="flex flex-wrap gap-4 backdrop-blur-xl pb-20"></div>
-        </div>
+        </div>{" "}
+        {currentTrackUri && (
+          <div className="fixed bottom-0  left-0 w-full rounded-t-xl bg-black/80  backdrop-blur-xl  z-50 p-2">
+            <SpotifyEmbed uri={currentTrackUri} />
+          </div>
+        )}
       </section>
     </>
   );
