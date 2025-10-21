@@ -2,37 +2,46 @@
 import Image from "next/image";
 import { useRef, useState, useEffect } from "react";
 
+// --- Type Definitions ---
+interface SpotifyController {
+  play: () => Promise<void>;
+  loadUri: (uri: string) => void;
+  addListener: (event: string, cb: () => void) => void;
+  removeListener?: (event: string) => void;
+  destroy?: () => void;
+}
+
+interface SpotifyIframeApi {
+  createController: (
+    element: HTMLElement,
+    options: {
+      uri: string;
+      width: string;
+      height: string;
+      theme?: string;
+    },
+    callback: (controller: SpotifyController) => void
+  ) => SpotifyController | void;
+}
+
+declare global {
+  interface Window {
+    SpotifyIframeApi?: SpotifyIframeApi;
+    onSpotifyIframeApiReady?: (api: SpotifyIframeApi) => void;
+  }
+}
+
 export default function SpotifyEmbed({ uri }: { uri: string }) {
   const embedRef = useRef<HTMLDivElement>(null);
-  const controllerRef = useRef<any>(null);
+  const controllerRef = useRef<SpotifyController | null>(null);
   const [iFrameAPI, setIFrameAPI] = useState<SpotifyIframeApi | null>(null);
   const [playerLoaded, setPlayerLoaded] = useState(false);
   const [showSpinner, setShowSpinner] = useState(true);
 
-  type SpotifyIframeApi = {
-    createController: (
-      element: HTMLElement,
-      options: {
-        uri: string;
-        width: string;
-        height: string;
-        theme?: string;
-      },
-      callback: (controller: SpotifyController) => void
-    ) => void;
-  };
-
-  type SpotifyController = {
-    play: () => Promise<void>;
-    loadUri: (uri: string) => void;
-    addListener: (event: string, cb: () => void) => void;
-    removeListener?: (event: string) => void;
-    destroy?: () => void;
-  };
-
   // --- Load Spotify IFrame API ---
   useEffect(() => {
     if (document.getElementById("spotify-iframe-api")) return;
+
     const script = document.createElement("script");
     script.id = "spotify-iframe-api";
     script.src = "https://open.spotify.com/embed/iframe-api/v1";
@@ -45,11 +54,11 @@ export default function SpotifyEmbed({ uri }: { uri: string }) {
     if (iFrameAPI) return;
 
     const checkApi = () => {
-      if ((window as any).SpotifyIframeApi) {
-        setIFrameAPI((window as any).SpotifyIframeApi);
+      if (window.SpotifyIframeApi) {
+        setIFrameAPI(window.SpotifyIframeApi);
       } else {
-        (window as any).onSpotifyIframeApiReady = (SpotifyIframeApi: any) => {
-          setIFrameAPI(SpotifyIframeApi);
+        window.onSpotifyIframeApiReady = (api: SpotifyIframeApi) => {
+          setIFrameAPI(api);
         };
       }
     };
@@ -61,47 +70,25 @@ export default function SpotifyEmbed({ uri }: { uri: string }) {
   useEffect(() => {
     if (!iFrameAPI || controllerRef.current || !embedRef.current) return;
 
-    const controller = iFrameAPI.createController(
-      embedRef.current,
-      {
-        width: "100%",
-        height: "100px",
-        uri,
-        theme: "dark",
-      },
-      (ctrl: any) => {
-        controllerRef.current = ctrl;
-
-        ctrl.addListener("ready", async () => {
-          setPlayerLoaded(true);
-          try {
-            await ctrl.play();
-          } catch (err) {
-            console.warn("Autoplay blocked or failed:", err);
-          }
-        });
-      }
-    );
-
-    // fallback if track doesn’t load in 5s
     const timeout = setTimeout(() => setPlayerLoaded(true), 5000);
 
     return () => {
       clearTimeout(timeout);
-      controller?.removeListener?.("playback_update");
-      controller?.destroy?.();
+      controllerRef.current?.removeListener?.("playback_update");
+      controllerRef.current?.destroy?.();
     };
-  }, [iFrameAPI]);
+  }, [iFrameAPI, uri]);
 
   // --- Update track when URI changes ---
   useEffect(() => {
     if (!controllerRef.current || !uri) return;
+
     try {
       controllerRef.current.loadUri(uri);
       setPlayerLoaded(false);
-      controllerRef.current.play().catch((err: any) => {
-        console.warn("Autoplay failed:", err);
-      });
+      controllerRef.current
+        .play()
+        .catch((err: unknown) => console.warn("Autoplay failed:", err));
     } catch (err) {
       console.error("Failed to load URI:", err);
     }
