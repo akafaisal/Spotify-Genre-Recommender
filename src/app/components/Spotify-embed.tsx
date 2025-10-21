@@ -37,6 +37,7 @@ export default function SpotifyEmbed({ uri }: { uri: string }) {
   const [iFrameAPI, setIFrameAPI] = useState<SpotifyIframeApi | null>(null);
   const [playerLoaded, setPlayerLoaded] = useState(false);
   const [showSpinner, setShowSpinner] = useState(true);
+  const [controllerReady, setControllerReady] = useState(false);
 
   // --- Load Spotify IFrame API ---
   useEffect(() => {
@@ -53,22 +54,36 @@ export default function SpotifyEmbed({ uri }: { uri: string }) {
   useEffect(() => {
     if (iFrameAPI) return;
 
-    const checkApi = () => {
-      if (window.SpotifyIframeApi) {
-        setIFrameAPI(window.SpotifyIframeApi);
-      } else {
-        window.onSpotifyIframeApiReady = (api: SpotifyIframeApi) => {
-          setIFrameAPI(api);
-        };
-      }
-    };
-
-    checkApi();
+    if (window.SpotifyIframeApi) {
+      setIFrameAPI(window.SpotifyIframeApi);
+    } else {
+      window.onSpotifyIframeApiReady = (api: SpotifyIframeApi) => {
+        setIFrameAPI(api);
+      };
+    }
   }, [iFrameAPI]);
 
   // --- Create controller once ---
   useEffect(() => {
     if (!iFrameAPI || controllerRef.current || !embedRef.current) return;
+
+    iFrameAPI.createController(
+      embedRef.current,
+      { width: "100%", height: "100px", uri, theme: "dark" },
+      (ctrl: SpotifyController) => {
+        controllerRef.current = ctrl;
+
+        ctrl.addListener("ready", async () => {
+          setPlayerLoaded(true);
+          setControllerReady(true);
+          try {
+            await ctrl.play();
+          } catch (err) {
+            console.warn("Autoplay blocked or failed:", err);
+          }
+        });
+      }
+    );
 
     const timeout = setTimeout(() => setPlayerLoaded(true), 5000);
 
@@ -77,11 +92,11 @@ export default function SpotifyEmbed({ uri }: { uri: string }) {
       controllerRef.current?.removeListener?.("playback_update");
       controllerRef.current?.destroy?.();
     };
-  }, [iFrameAPI, uri]);
+  }, [iFrameAPI]);
 
   // --- Update track when URI changes ---
   useEffect(() => {
-    if (!controllerRef.current || !uri) return;
+    if (!controllerRef.current || !uri || !controllerReady) return;
 
     try {
       controllerRef.current.loadUri(uri);
@@ -92,7 +107,7 @@ export default function SpotifyEmbed({ uri }: { uri: string }) {
     } catch (err) {
       console.error("Failed to load URI:", err);
     }
-  }, [uri]);
+  }, [uri, controllerReady]);
 
   // --- Hide spinner after player load ---
   useEffect(() => {
