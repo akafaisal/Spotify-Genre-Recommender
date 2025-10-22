@@ -14,15 +14,9 @@ export default function HomePage() {
         <AboutPage />
       </section>
       <section id="working" className="">
-        <Working /><div id="ezoic-pub-ad-placeholder-101"></div>
-<script>
-    ezstandalone.cmd.push(function () {
-        ezstandalone.showAds(101);
-    });
-</script>
+        <Working />
       </section>
-      
-      
+
       <section id="features" className="mt-15 pl-6 lg:pl-30 md:pl-15 ">
         <FeaturesSection />
       </section>
