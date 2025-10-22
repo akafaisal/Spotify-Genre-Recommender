@@ -111,7 +111,7 @@ export default function FeaturesSection() {
   // Spotify Embed state (not fully utilized in this snippet)
 
   const [currentTrackUri, setCurrentTrackUri] = useState<string>();
-
+  let clickBlocked = false;
   return (
     <>
       <div className="fixed z-10 top-0 left-1 -ml-17">
@@ -138,14 +138,14 @@ export default function FeaturesSection() {
                     <Info className="text-white" />
                   </div>
                 </PopoverTrigger>
-                <PopoverContent className="p-5 pb-6 font-extrabold w-75 bg-black text-white">
+                <PopoverContent className="p-5 pb-6 font-extrabold w-85 bg-black text-white">
                   <p className="font-honk text-lg -mb-1">HOW TO USE?</p>
                   <p>
-                    Single Tap: <span className="italic">💗Like a Song</span>
+                    Single Tap: <span className="italic">💗 Like a Song</span>
                   </p>
                   <p>
                     Double Tap:{" "}
-                    <span className="italic">🎵Open in Spotify</span>
+                    <span className="italic">🎵 Open Spotify Player</span>
                   </p>
                 </PopoverContent>
               </Popover>
@@ -209,20 +209,14 @@ export default function FeaturesSection() {
                   key={t.id}
                   onClick={(e) => {
                     e.stopPropagation();
+                    if (clickBlocked) return;
                     handleLike(t.id, t.artists[0].id);
-
-                    // Add to queue if not already in
-                    setCurrentTrackUri(() => {
-                      const uri = `spotify:track:${t.id}`;
-                      return uri;
-                    });
                   }}
-                  onDoubleClick={() => {
-                    window.open(
-                      t.external_urls.spotify,
-                      "_blank",
-                      "noopener,noreferrer"
-                    );
+                  onDoubleClick={(e) => {
+                    e.stopPropagation();
+                    clickBlocked = true; // block next single click
+                    setTimeout(() => (clickBlocked = false), 300); // reset after short delay
+                    setCurrentTrackUri(`spotify:track:${t.id}`);
                   }}
                   className={`w-[45%] sm:w-[30%] md:w-[22%] rounded-xl hover:scale-105 p-6  transition-all  duration-200 border cursor-pointer  border-white 
     ${

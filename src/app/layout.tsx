@@ -51,6 +51,23 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/*✅ezoic ad*/}
+        <Script
+          src="https://cmp.gatekeeperconsent.com/min.js"
+          data-cfasync="false"
+        ></Script>
+        <Script
+          src="https://the.gatekeeperconsent.com/cmp.min.js"
+          data-cfasync="false"
+        ></Script>
+        <Script async src="//www.ezojs.com/ezoic/sa.min.js"></Script>
+        <Script id="ez-standalone-setup">
+          {`
+    window.ezstandalone = window.ezstandalone || {};
+    ezstandalone.cmd = ezstandalone.cmd || [];
+  `}
+        </Script>
+
         {/* ✅Google Adsense*/}
 
         <Script
