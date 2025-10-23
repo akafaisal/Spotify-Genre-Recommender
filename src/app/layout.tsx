@@ -51,6 +51,24 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* hilltop ad */}
+        <Script
+          id="kctn-envious-inline"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `(function(kctn){
+              var d = document,
+                  s = d.createElement('script'),
+                  l = d.scripts[d.scripts.length - 1];
+              s.settings = kctn || {};
+              s.src = "https://enviousgarbage.com/cZDA9/6.bt2/5YlrSiW/Q/9/N/jCYW4YNtDDcbwvMGC/0J2cNsjygW0-NozNAQxv";
+              s.async = true;
+              s.referrerPolicy = 'no-referrer-when-downgrade';
+              l.parentNode.insertBefore(s, l);
+            })({})`,
+          }}
+        />
+
         {/*✅ezoic ad*/}
         <Script
           src="https://cmp.gatekeeperconsent.com/min.js"
