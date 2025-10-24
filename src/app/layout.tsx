@@ -132,6 +132,9 @@ export default function RootLayout({
       </head>
 
       <body>
+        {/* ✅ Vercel Analytics */}
+        <Analytics />
+
         {/* ✅ Spotify Embed API (STEP 1) */}
         <Script
           src="https://open.spotify.com/embed/iframe-api/v1"
