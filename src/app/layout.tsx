@@ -56,6 +56,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <meta name="referrer" content="no-referrer-when-downgrade" />
         {/* hilltop ad */}
         <Script
           id="kctn-envious-inline"

@@ -34,6 +34,15 @@ const Menu = () => {
               <SheetTitle className="font-honk text-2xl hover:scale-103 transition-transform">
                 <Link href="/contact">Contact Us</Link>
               </SheetTitle>
+              <SheetTitle className="text-2xl bg-white/30  hover:scale-103 transition-transform">
+                <a
+                  href="https://enviousgarbage.com/b/3.VF0RPX3hp/vZbImKVOJ/ZID/0Aa2zN..."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Check this out
+                </a>
+              </SheetTitle>
 
               <SheetTitle className="mt-3">
                 <a
