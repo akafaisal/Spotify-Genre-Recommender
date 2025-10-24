@@ -41,6 +41,11 @@ export const metadata = {
     description: "Tap your mood and discover new Spotify genres with Genrify.",
     images: ["https://genrify.live/og-image.png"],
   },
+
+  other: {
+    fddeee2e9e57a7e814fa6da0516a0141dd534442:
+      "fddeee2e9e57a7e814fa6da0516a0141dd534442",
+  },
 };
 
 export default function RootLayout({
