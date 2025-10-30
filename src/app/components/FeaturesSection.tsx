@@ -11,9 +11,7 @@ import {
 } from "@/components/ui/popover";
 import SpotifyEmbed from "./Spotify-embed";
 
-{
-  /*import Link from "next/link";*/
-}
+import { Play, Pause } from "lucide-react";
 
 // Define types
 type Track = {
@@ -110,11 +108,11 @@ export default function FeaturesSection() {
   // Spotify Embed state (not fully utilized in this snippet)
 
   const [currentTrackUri, setCurrentTrackUri] = useState<string>();
-  let clickBlocked = false;
+
   return (
     <>
       {/*main content*/}
-      <section className="relative ">
+      <section className="relative">
         <div className="px-4 pt-2 md:pt-6 bg-gradient-to-br min-h-screen">
           <div className="bg-white/15 rounded-3xl p-4 mb-4 max-w-12/13">
             <div>
@@ -133,14 +131,14 @@ export default function FeaturesSection() {
                     <Info className="text-white" />
                   </div>
                 </PopoverTrigger>
-                <PopoverContent className="p-5 pb-6 font-extrabold w-85 bg-black text-white">
+                <PopoverContent className="p-5 pb-6 font-extrabold w-90 bg-black text-white">
                   <p className="font-honk text-lg -mb-1">HOW TO USE?</p>
                   <p>
-                    Single Tap: <span className="italic">💗 Like a Song</span>
+                    Tap On Card: <span className="italic">💗 Like a Song</span>
                   </p>
                   <p>
-                    Double Tap:{" "}
-                    <span className="italic">🎵 Open Spotify Player</span>
+                    Tap on Image:{" "}
+                    <span className="italic">🎵 Play Spotify Player</span>
                   </p>
                 </PopoverContent>
               </Popover>
@@ -198,55 +196,62 @@ export default function FeaturesSection() {
               </div>
             </div>
           ) : (
-            <div className="flex flex-wrap gap-4 backdrop">
+            <div className="flex flex-wrap gap-4 backdrop select-none">
               {visibleTracks.map((t) => (
                 <div
                   key={t.id}
                   onClick={(e) => {
                     e.stopPropagation();
-                    if (clickBlocked) return;
                     handleLike(t.id, t.artists[0].id);
                   }}
-                  onDoubleClick={(e) => {
-                    e.stopPropagation();
-                    clickBlocked = true; // block next single click
-                    setTimeout(() => (clickBlocked = false), 300); // reset after short delay
-                    setCurrentTrackUri(`spotify:track:${t.id}`);
-                  }}
-                  className={`w-[45%] sm:w-[30%] md:w-[22%] rounded-xl hover:scale-105 p-6  transition-all  duration-200 border cursor-pointer  border-white 
+                  className={`tabIndex={0} w-[45%] sm:w-[30%] md:w-[22%] rounded-xl hover:scale-105 p-6  transition-all  duration-200 border cursor-pointer  border-white 
     ${
       liked[t.id]
         ? "bg-black border-white "
         : "bg-white/5 hover:bg-white/20 hover:scale-105"
     }`}
                 >
-                  <Image
-                    src={t.album.images[0].url}
-                    alt={t.name}
-                    width={300}
-                    height={300}
-                    className="w-full h-auto rounded-xl transition-all duration-100 object-cover shadow-lg border-2 border-white/50"
-                  />
-                  <div className="flex md:flex-row mt-2 flex-col items-center ">
-                    <div className="mt-2 text-sm  md:w-5/6">
+                  <div className="relative group">
+                    <Image
+                      src={t.album.images[0].url}
+                      alt={t.name}
+                      width={300}
+                      height={300}
+                      className="w-full h-auto rounded-xl transition-all duration-100 object-cover shadow-lg border-2 border-white/50 hover:brightness-120"
+                    />
+                    {/* Play icon overlay */}
+                    <div
+                      className="absolute inset-0 flex items-center justify-center rounded-xl bg-black/40 opacity-0 group-hover:opacity-100 transition-all duration-100"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (currentTrackUri === `spotify:track:${t.id}`) {
+                          setCurrentTrackUri(undefined); // pause or stop
+                        } else {
+                          setCurrentTrackUri(`spotify:track:${t.id}`); // play
+                        }
+                      }}
+                    >
+                      {currentTrackUri === `spotify:track:${t.id}` ? (
+                        <Pause className="w-12 h-12 text-white" />
+                      ) : (
+                        <Play className="w-12 h-12 text-white" />
+                      )}
+                    </div>
+                  </div>
+                  <div className="flex md:flex-row mt-2  flex-col items-center">
+                    <div className="mt-2 text-sm  md:w-5/6 ">
                       <div className="font-bold text-zinc-100 ">{t.name}</div>
                       <div className="text-gray-300 font-light ">
                         {t.artists[0].name}
                       </div>
                     </div>
                     <div className="md:ml-auto ">
-                      <button
-                        className="  hover:scale-110 transition-transform "
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleLike(t.id, t.artists[0].id);
-                        }}
-                      >
+                      <button className="  hover:scale-110 transition-transform ">
                         <LucideHeart
                           className={
                             liked[t.id]
-                              ? "mt-4 mr-1 scale-140 transition-all  hover:rotate-6  cursor-pointer "
-                              : "hover:scale-120 hover:rotate-6 transition-all duration-100 cursor-pointer mt-4 scale-120 mr-1 "
+                              ? " border rounded-2xl p-1 mt-4 mr-1 scale-140 transition-all  hover:rotate-6  cursor-pointer "
+                              : " border rounded-2xl p-1 hover:scale-120 hover:rotate-6 transition-all duration-100 cursor-pointer mt-4 scale-120 mr-1 "
                           }
                           color={liked[t.id] ? " red" : "white"}
                           fill={liked[t.id] ? "red" : "none"}

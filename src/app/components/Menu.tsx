@@ -43,6 +43,7 @@ const Menu = () => {
         {/* Home Button */}
         <Link href="/#features">
           <Image
+            className="hover:scale-105 transition-transform"
             src="/logo.png"
             alt="Home button"
             width={70}
