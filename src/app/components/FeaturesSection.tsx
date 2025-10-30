@@ -4,7 +4,6 @@ import Image from "next/image";
 import { LucideHeart } from "lucide-react";
 import { Info } from "lucide-react";
 
-import Menu from "./Menu";
 import {
   Popover,
   PopoverTrigger,
@@ -114,12 +113,8 @@ export default function FeaturesSection() {
   let clickBlocked = false;
   return (
     <>
-      <div className="fixed z-10 top-0 left-1 -ml-17">
-        <Menu />
-      </div>
-
       {/*main content*/}
-      <section className="relative">
+      <section className="relative ">
         <div className="px-4 pt-2 md:pt-6 bg-gradient-to-br min-h-screen">
           <div className="bg-white/15 rounded-3xl p-4 mb-4 max-w-12/13">
             <div>

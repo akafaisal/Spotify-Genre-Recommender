@@ -25,7 +25,7 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="min-h-screen  p-8">
+    <div className="min-h-screen p-8">
       <div className="max-w-3xl mx-auto bg-white/30 rounded-3xl p-4 ounded-lg shadow-md">
         <h1 className="text-3xl font-bold mb-4 ">Contact Me</h1>
         {submitted ? (

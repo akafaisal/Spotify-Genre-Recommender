@@ -11,10 +11,10 @@ export default function HomePage() {
       <section id="hero">
         <HeroSection />
       </section>
-      <section id="hero">
+      <section id="about">
         <AboutPage />
       </section>
-      <section id="working" className="">
+      <section id="working">
         <Working />
       </section>
       <div className="mt-2 flex justify-center ">

@@ -1,6 +1,7 @@
 import "./globals.css";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
+import Menu from "@/app/components/Menu";
 
 export const metadata = {
   metadataBase: new URL("https://genrify.live"),
@@ -132,6 +133,7 @@ export default function RootLayout({
       </head>
 
       <body>
+        <Menu />
         {/* ✅ Vercel Analytics */}
         <Analytics />
 
