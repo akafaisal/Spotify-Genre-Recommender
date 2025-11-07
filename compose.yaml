@@ -1,0 +1,20 @@
+services:
+  typescript-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: typescript-app:latest
+    container_name: typescript-app
+    restart: unless-stopped
+    init: true
+    ports:
+      - "3000:3000" # Next.js default port
+    env_file: ./.env # Uncomment if .env file exists
+    networks:
+      - appnet
+    # If you add a database, add 'depends_on' here
+
+# Network for inter-service communication
+networks:
+  appnet:
+    driver: bridge

@@ -1,0 +1,61 @@
+# Node.js dependencies
+node_modules/
+
+# Next.js build output
+.next/
+
+# IDE/editor settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Build outputs
+build/
+dist/
+out/
+
+# Test and debug artifacts
+test/
+tests/
+debug/
+*.log
+
+# Version control
+.git/
+.gitignore
+.svn/
+.hg/
+
+# Environment and secrets
+.env*
+*.env
+*.pem
+*.key
+*.crt
+
+# Local and temp files
+.local/
+tmp/
+temp/
+*.tmp
+
+# Documentation
+README*
+*.md
+docs/
+
+# Docker files
+Dockerfile*
+docker-compose*
+
+# Miscellaneous
+*.DS_Store
+Thumbs.db
+
+# Project-specific: skip public/ (contains static assets needed)
+# Project-specific: skip package.json, package-lock.json (needed for install)
+# Project-specific: skip src/, scripts/, lib/, models/ (source code needed)
+# Project-specific: skip public/ (static assets needed)
+
+# Exclude everything else not explicitly needed for build
