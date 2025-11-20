@@ -1,7 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { ChartColumnIncreasing, SquareMenu, Github } from "lucide-react";
+import {
+  ChartColumnIncreasing,
+  SquareMenu,
+  Github,
+  Coffee,
+} from "lucide-react";
 import {
   Sheet,
   SheetContent,
@@ -10,6 +15,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import Image from "next/image";
+import OrderCoffee from "./OrderCoffee";
 
 const Menu = () => {
   const [open, setOpen] = useState(false);
@@ -62,7 +68,7 @@ const Menu = () => {
 
             <SheetContent
               side="right"
-              className="bg-white/30 border-black rounded-bl-3xl h-1/4 w-1/2 md:w-1/4 lg:w-1/6 "
+              className="bg-white/30 border-black rounded-bl-2xl h-1/3 w-1/2 md:w-1/4 lg:w-1/6 "
             >
               <SheetHeader className=" flex flex-col gap-4">
                 <SheetTitle className="font-honk text-2xl hover:scale-103 transition-transform">
@@ -73,16 +79,25 @@ const Menu = () => {
                   <Link href="/contact">Contact Us</Link>
                 </SheetTitle>
 
-                <SheetTitle className="mt-3">
+                <SheetTitle className="">
                   <a
                     href="https://github.com/akafaisal/Spotify-Genre-Recommender"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center p-2 rounded-xl bg-zinc-900 hover:bg-zinc-800 transition-all duration-300 shadow-sm"
+                    className="inline-flex items-center gap-2 justify-center p-2 rounded-xl bg-zinc-900 hover:bg-zinc-800 transition-all duration-300 shadow-sm"
                   >
                     <Github className="w-5 h-5 text-white" />
-                    <div className="pl-2 font-honk">Github</div>
+                    <div className=" font-honk">My Github</div>
                   </a>
+                </SheetTitle>
+                <SheetTitle id="order-coffee">
+                  <div className="flex w-fit p-2  items-center bg-zinc-900 gap-2 cursor-pointer hover:bg-zinc-800 transition-all duration-300 shadow-sm rounded-xl">
+                    <div className="">
+                      <Coffee className="w-5 h-5 text-white" />
+                    </div>
+                    <div className="font-honk">Order a Coffee</div>
+                    <OrderCoffee />
+                  </div>
                 </SheetTitle>
               </SheetHeader>
             </SheetContent>
