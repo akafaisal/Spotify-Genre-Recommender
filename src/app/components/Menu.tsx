@@ -95,8 +95,9 @@ const Menu = () => {
                     <div className="">
                       <Coffee className="w-5 h-5 text-white" />
                     </div>
-                    <div className="font-honk">Order a Coffee</div>
-                    <OrderCoffee />
+                    <div className="font-honk">
+                      <OrderCoffee />
+                    </div>
                   </div>
                 </SheetTitle>
               </SheetHeader>
