@@ -3,6 +3,14 @@ import Script from "next/script";
 import { useState } from "react";
 import axios from "axios";
 
+declare global {
+  interface Window {
+    Razorpay: new (options: Record<string, unknown>) => {
+      open: () => void;
+    };
+  }
+}
+
 export default function OrderCoffee() {
   const [loading, setLoading] = useState(false);
 
