@@ -10,6 +10,7 @@ import {
   PopoverContent,
 } from "@/components/ui/popover";
 import SpotifyEmbed from "./Spotify-embed";
+import Llmbox from "./Llmbox";
 
 import { Play, Pause } from "lucide-react";
 
@@ -108,7 +109,7 @@ export default function FeaturesSection() {
   // Spotify Embed state (not fully utilized in this snippet)
 
   const [currentTrackUri, setCurrentTrackUri] = useState<string>();
-
+  console.log("RECM VALUE 👉", recm);
   return (
     <>
       {/*main content*/}
@@ -120,8 +121,8 @@ export default function FeaturesSection() {
               <div className="hidden  md:block blob blob2 absolute blur-[1px] top-100 right-70 w-[600px] h-[800px] bg-white/30 opacity-60 rounded-full pointer-events-none" />
             </div>
             <div className="flex flex-row justify-center items-center">
-              <h1 className="text-4xl mb-2 font-honk font-extrabold tracking-wider mr-2">
-                ✨ Select Mood
+              <h1 className="text-4xl mb-2 ml-2 font-honk font-extrabold tracking-wider mr-2">
+                Select Mood
               </h1>
 
               {/*Popover for how to use*/}
@@ -142,6 +143,7 @@ export default function FeaturesSection() {
                   </p>
                 </PopoverContent>
               </Popover>
+              <Llmbox mood={mood} />
 
               {/*<Link href={"/fav"}>
             <button className="px-3 mb-2 flex flex-row gap-2 items-center rounded-xl  bg-white/30 hover:bg-white/50 transition-all duration-300 border border-white/20 cursor-pointer hover:scale-105">

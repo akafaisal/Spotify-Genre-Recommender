@@ -84,6 +84,6 @@ export const recommendByMood = async (mood: string) => {
   const recommendedTracks = results
     .sort(() => 0.5 - Math.random())
     .slice(0, 100);
-  console.log("Recommended Tracks:", recommendedTracks);
+
   return recommendedTracks;
 };

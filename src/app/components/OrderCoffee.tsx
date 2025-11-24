@@ -45,7 +45,7 @@ export default function OrderCoffee() {
         disabled={loading}
         className="bg-pink text-white"
       >
-        {loading ? "Processing..." : "Buy Me A Coffee ₹99"}
+        {loading ? "Processing..." : "Buy Coffee ₹99"}
       </button>
       <Script src="https://checkout.razorpay.com/v1/checkout.js"></Script>
     </>
